@@ -1,0 +1,85 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>ReImager</title>
+
+  <link rel="stylesheet" href="style/material.min.css">
+  <link rel="stylesheet" href="style/main.css">
+  <script src="scripts/jquery-3.2.1.js"></script>
+  <script src="scripts/material.min.js"></script>
+  <script src="scripts/main.js"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+
+<body>
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <header class="mdl-layout__header mdl-layout__header--scroll">
+      <div class="mdl-layout__header-row">
+        <!-- Title -->
+        <span class="mdl-layout-title">ReImager</span>
+        <!-- Add spacer, to align navigation to the right -->
+        <div class="mdl-layout-spacer"></div>
+        <!-- Navigation -->
+        <nav class="mdl-navigation">
+          <a class="mdl-navigation__link" href="">RELOAD</a>
+        </nav>
+      </div>
+    </header>
+    <div class="mdl-layout__drawer">
+      <span class="mdl-layout-title">ReImager</span>
+      <nav class="mdl-navigation">
+        <a class="mdl-navigation__link" href="">RELOAD</a>
+      </nav>
+    </div>
+    <main class="mdl-layout__content">
+      <div class="page-content">  <!-- ---- CONTENT ---------------------------------------------------------------- -->
+
+        <div class="controls card-wide mdl-card mdl-shadow--4dp">
+          <div class="upload-area control-section">
+            <input type="file" id="selector" onChange="loadFile(event)">
+            <label for="selector" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
+              Upload image
+            </label>
+            <span id="img-name"></span>
+          </div>
+        </div>
+
+        <div class="controls card-wide mdl-card mdl-shadow--4dp">
+          <div class="palette-options control-section">
+            <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored"
+                    id="start" onclick="genPal()">Generate palette</button>
+            <span id="percent_done"></span>
+            <div class="palette"></div>
+          </div>
+        </div>
+
+        <div class="controls card-wide mdl-card mdl-shadow--4dp">
+          <div class="main-controls control-section">
+            <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+                    id="start" onclick="reimage()">Begin</button>
+            <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored"
+                    id="toggle" onclick="toggle()">Pause</button>
+            <span id="iterations"></span>
+          </div>
+        </div>
+
+        <div class="image_holder card-wide mdl-card mdl-shadow--4dp">
+          <div class="image_orig">
+            <!--<img id="preview" height="400", width="300"></img>-->
+          </div>
+
+          <div class="images">
+            <canvas id="canvas", width="0", height="0"></canvas>
+            <canvas id="canvas_orig", width="0", height="0"></canvas>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+</body>
+</html>

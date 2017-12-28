@@ -1,0 +1,66 @@
+body {
+  background: #ddd;
+}
+
+.page-content {
+  padding: 10pt;
+}
+
+#hidden_canvas {
+  display: none;
+}
+
+.card-wide.mdl-card {
+  width: auto;
+  min-height: auto;
+
+  margin: auto;
+  margin-bottom: 10pt;
+
+  padding-top: 4pt;
+  padding-bottom: 4pt;
+  padding-left: 8pt;
+  padding-right: 8pt;
+}
+
+/* CONTROLS -------------- */
+.control-section {
+  margin-top: 4pt;
+  margin-bottom: 4pt;
+}
+
+/* uploading */
+#selector {
+  display: none;
+}
+#img-name {
+  margin-left: 8pt;
+}
+
+/* palette setting */
+#percent_done {
+  margin-left: 8pt;
+}
+.palette {
+
+}
+.colorSquare {
+  display: inline-block;
+
+  height: 24pt;
+  width: 24pt;
+
+  margin: 1pt;
+  margin-top: 10pt;
+}
+
+/* main controls */
+#iterations {
+  margin-left: 8pt;
+}
+
+/* IMAGE DISPLAY --------- */
+canvas {
+  margin-top: 8pt;
+  margin-bottom: 8pt;
+}
