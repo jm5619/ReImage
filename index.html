@@ -53,7 +53,12 @@
             <div id="palette_setting_holder" class="holder">
               <div id="slot_holder">
                 <div id="palette_setting_title">
-                  Configure and generate a color palette
+                  <div id="palette_setting_title_icon" class="title_icon icon material-icons">info</div>
+                  <div class="mdl-tooltip mdl-tooltip--large" for="palette_setting_title_icon">
+                    Here you can select whether a palette of colors should be generated to be used in the image
+                    or random colors should be used instead. You can further set the number of colors in palette
+                    and actually generate it.</div>
+                  <div class="title_text"><p>Configure and generate a color palette</p></div>
                 </div>
 
                 <div id="color_radio_holder">
@@ -92,7 +97,11 @@
 
             <div id="sliders_holder" class="holder">
               <div id="sliders_title">
-                Change color of selected palette slot
+                <div id="sliders_title_icon" class="title_icon icon material-icons">info</div>
+                <div class="mdl-tooltip mdl-tooltip--large" for="sliders_title_icon">
+                  Once a palette is generated, each of its colors can be selected by clicking on its color square.
+                  After that it can be modified here.</div>
+                <div class="title_text"><p>Change color of selected palette slot</p></div>
               </div>
 
               <div class="slider_and_text_holder">
@@ -136,9 +145,13 @@
             </div>
 
 
-            <div id="sliders_holder" class="holder">
-              <div id="sliders_title">
-                Change palette deviation intervals
+            <div id="i_sliders_holder" class="holder">
+              <div id="i_sliders_title">
+                <div id="i_sliders_title_icon" class="title_icon icon material-icons">info</div>
+                <div class="mdl-tooltip mdl-tooltip--large" for="i_sliders_title_icon">
+                  Change how precisely the colors in palette should be followed.
+                  On 0 the color channel is always exactly as specified in a given color of the palette. On 30 it can be up to 15 values higher or lower. </div>
+                <div class="title_text"><p>Configure palette deviation intervals</p></div>
               </div>
 
               <div class="slider_and_text_holder">

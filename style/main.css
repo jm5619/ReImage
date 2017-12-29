@@ -1,6 +1,13 @@
 body {
   background: #ddd;
-  color: #485c66;
+  color: #485c66;;
+}
+* {
+  font-size: 14px;
+  font-weight: 400;
+}
+.mdl-tooltip.mdl-tooltip--large {
+  max-width: 300pt;
 }
 
 .page-content {
@@ -33,6 +40,20 @@ body {
   margin-left: 10pt;
 }
 
+/* titles */
+.title_icon {
+  display: inline-block;
+  vertical-align: top;
+}
+.title_text {
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 1pt;
+}
+p {
+  margin-bottom: 0pt;
+}
+
 /* uploading */
 #selector {
   display: none;
@@ -45,6 +66,7 @@ body {
 #palette_setting_title {
   margin-bottom: 10pt;
 }
+
 #palette_setting_holder {
   display: inline-block;
   vertical-align: top;
@@ -69,11 +91,10 @@ body {
 }
 
 /* palette recoloring */
-#sliders_title {
-  margin-left: 15pt;
+#sliders_title, #i_sliders_title {
   margin-bottom: 10pt;
 }
-#sliders_holder {
+#sliders_holder, #i_sliders_holder {
   display: inline-block;
   vertical-align: top;
   margin-top: 6pt;

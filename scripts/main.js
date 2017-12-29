@@ -70,7 +70,6 @@ function reimage() {
 		var rgbDark = [mainMeans[darkest], mainMeans[darkest + 1], mainMeans[darkest + 2], 255];
 
 		if (mainColorMode > 1) {
-			console.log("AYY LMAO MY DUDES");
 			for (var i = 0; i < 3; i++) {
 				rgbDark[i] = Math.round(rgbDark[i] - mainColorMargins[i] / 2);
 			}
