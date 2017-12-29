@@ -38,6 +38,9 @@ body {
 }
 
 /* palette setting */
+#gen_pal {
+  float:right;
+}
 #percent_done {
   margin-left: 8pt;
 }

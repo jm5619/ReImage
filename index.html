@@ -50,9 +50,21 @@
 
         <div class="controls card-wide mdl-card mdl-shadow--4dp">
           <div class="palette-options control-section">
+            <div>
+              <div id="field_colors"   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input id="slot_count" class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?">
+                <label class="mdl-textfield__label" for="slot_count">Number of colors in palette...</label>
+                <span class="mdl-textfield__error">Input is not a number!</span>
+              </div>
+              <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored mdl-js-ripple-effect"
+                      id="set_slots" onclick="setSlots()">
+                <i class="material-icons">done</i>
+              </button>
+            </div>
+
             <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored"
-                    id="start" onclick="genPal()">Generate palette</button>
-            <span id="percent_done"></span>
+                    id="gen_pal" onclick="genPal()">Generate palette</button>
+            Progress: <span id="percent_done">0%</span>
             <div class="palette"></div>
           </div>
         </div>

@@ -2,6 +2,8 @@ var draw;
 var drawWorker;
 var mainMeans;
 
+var mainSlots = 5;
+
 document.onload = function() {
 		//document.getElementById("selector").addEventListener("change", logFile());
 }
@@ -59,11 +61,26 @@ function reimage() {
 }
 
 
+function setSlots() {
+	var num = parseInt($("#slot_count").val());
+
+	if (!isNaN(num)) {
+		if (num > 255) {
+			num = 255;
+		} else if (num < 1) {
+			num = 1;
+		}
+		mainSlots = Math.floor(num);
+		console.log("set mainSlots to "+mainSlots);
+	}
+}
+
+
 function genPal() {
 	var canvasOrig = document.getElementById("canvas_orig");
 	var ctxOrig = canvasOrig.getContext("2d");
 	var imgOrig = ctxOrig.getImageData(0, 0, canvasOrig.width, canvasOrig.height);
-	var clusterCount = 5;
+	var clusterCount = mainSlots;
 
 	paletteWorker = new Worker("scripts/paletteWorker.js");
 
@@ -71,6 +88,8 @@ function genPal() {
 		$("#percent_done").text(msg.data.percentDone+"%");	// update generation percentage
 
 		if (msg.data.done) {																// finished
+			$(".palette").empty();
+
 			var means = msg.data.means
 			mainMeans = means;
 
