@@ -72,6 +72,11 @@ function setSlots() {
 		}
 		mainSlots = Math.floor(num);
 		console.log("set mainSlots to "+mainSlots);
+
+		var snackbarContainer = document.querySelector('#slots_notification');
+		'use strict';
+		var data = {message: "The palette will contain "+mainSlots+" colors."};
+		snackbarContainer.MaterialSnackbar.showSnackbar(data);
 	}
 }
 
@@ -123,7 +128,7 @@ function toggle() {
 	if (draw) {
 		console.log("toggle start");
 		drawWorker.postMessage({"first":false, "imgArr":null, "imgArrOrig":null, "width":null});
-		document.getElementById("toggle").innerHTML = "Stop";
+		document.getElementById("toggle").innerHTML = "Pause";
 	} else {
 		console.log("toggle stop");
 		document.getElementById("toggle").innerHTML = "Resume";

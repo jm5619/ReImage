@@ -50,21 +50,24 @@
 
         <div class="controls card-wide mdl-card mdl-shadow--4dp">
           <div class="palette-options control-section">
-            <div>
-              <div id="field_colors"   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                <input id="slot_count" class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?">
-                <label class="mdl-textfield__label" for="slot_count">Number of colors in palette...</label>
-                <span class="mdl-textfield__error">Input is not a number!</span>
+            <div id="palette_setting_holder">
+              <div id="slot_holder">
+                <div id="field_colors"   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  <input id="slot_count" class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?">
+                  <label class="mdl-textfield__label" for="slot_count">Number of colors in palette...</label>
+                  <span class="mdl-textfield__error">Input is not a number!</span>
+                </div>
+                <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored mdl-js-ripple-effect"
+                        id="set_slots" onclick="setSlots()">
+                  <i class="material-icons">done</i>
+                </button>
               </div>
-              <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored mdl-js-ripple-effect"
-                      id="set_slots" onclick="setSlots()">
-                <i class="material-icons">done</i>
-              </button>
+
+              <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored"
+                      id="gen_pal" onclick="genPal()">Generate palette</button>
+              Progress: <span id="percent_done">0%</span>
             </div>
 
-            <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored"
-                    id="gen_pal" onclick="genPal()">Generate palette</button>
-            Progress: <span id="percent_done">0%</span>
             <div class="palette"></div>
           </div>
         </div>
@@ -88,6 +91,12 @@
             <canvas id="canvas", width="0", height="0"></canvas>
             <canvas id="canvas_orig", width="0", height="0"></canvas>
           </div>
+        </div>
+
+        <!-- Toasts -->
+        <div id="slots_notification" class="mdl-js-snackbar mdl-snackbar">
+          <div class="mdl-snackbar__text"></div>
+          <button class="mdl-snackbar__action" type="button"></button>
         </div>
 
       </div>

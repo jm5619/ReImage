@@ -38,14 +38,17 @@ body {
 }
 
 /* palette setting */
+#palette_setting_holder {
+  display: inline-block;
+}
 #gen_pal {
-  float:right;
+  margin-right: 20pt;
 }
 #percent_done {
   margin-left: 8pt;
 }
 .palette {
-
+  margin-top: 10pt;
 }
 .colorSquare {
   display: inline-block;
@@ -54,7 +57,6 @@ body {
   width: 24pt;
 
   margin: 1pt;
-  margin-top: 10pt;
 }
 
 /* main controls */
@@ -63,6 +65,10 @@ body {
 }
 
 /* IMAGE DISPLAY --------- */
+.images {
+  overflow: auto;
+}
+
 canvas {
   margin-top: 8pt;
   margin-bottom: 8pt;
