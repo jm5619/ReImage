@@ -3,10 +3,13 @@ var drawWorker;
 var mainMeans;
 
 var mainSlots = 5;
+var mainActiveColor = -1;
 
-document.onload = function() {
-		//document.getElementById("selector").addEventListener("change", logFile());
-}
+$( document ).ready(function() {
+	$("#slot_count").keypress(function(e) {
+		if(e.which == 13) setSlots();
+	});
+});
 
 function reimage() {
 	var canvas = document.getElementById("canvas");
@@ -73,11 +76,98 @@ function setSlots() {
 		mainSlots = Math.floor(num);
 		console.log("set mainSlots to "+mainSlots);
 
+		$("#slot_count").val(mainSlots);
+
 		var snackbarContainer = document.querySelector('#slots_notification');
 		'use strict';
 		var data = {message: "The palette will contain "+mainSlots+" colors."};
 		snackbarContainer.MaterialSnackbar.showSnackbar(data);
 	}
+}
+
+
+function readColor(evt) {
+	$("#box"+mainActiveColor).css("border-style", "none");
+	console.log("#box"+mainActiveColor);
+
+	mainActiveColor = evt.substring(3, evt.length);
+	var rgb = [mainMeans[3 * mainActiveColor], mainMeans[3 * mainActiveColor + 1], mainMeans[3 * mainActiveColor + 2]];
+	console.log(rgb);
+
+	console.log("#box"+mainActiveColor);
+	$("#box"+mainActiveColor).css("border-style", "solid");
+	$("#box"+mainActiveColor).css("border-width", "2pt");
+	$("#box"+mainActiveColor).css("border-color", "#617c8a");
+
+	$("#slider_r")[0].MaterialSlider.change(rgb[0]);
+	$("#slider_g")[0].MaterialSlider.change(rgb[1]);
+	$("#slider_b")[0].MaterialSlider.change(rgb[2]);
+
+	$("#slider_r_text").val(rgb[0]);
+	$("#slider_g_text").val(rgb[1]);
+	$("#slider_b_text").val(rgb[2]);
+}
+
+
+function setColorSlider(id) {
+	if (mainActiveColor > -1) {
+		var c_value;
+		switch (id) {
+			case 0:	c_value = $("#slider_r").val();
+							$("#slider_r_text").val(c_value);
+							break;
+			case 1:	c_value = $("#slider_g").val();
+							$("#slider_g_text").val(c_value);
+							break;
+			case 2:	c_value = $("#slider_b").val();
+							$("#slider_b_text").val(c_value);
+							break;
+		}
+		setColor(id, c_value);
+	}
+}
+
+
+function setColorText(id) {
+	if (mainActiveColor > -1) {
+		var c_value;
+		var c_slider;
+		switch (id) {
+			case 0:	c_value = $("#slider_r_text").val();
+							c_slider = "slider_r";
+							break;
+			case 1:	c_value = $("#slider_g_text").val();
+							c_slider = "slider_g";
+							break;
+			case 2:	c_value = $("#slider_b_text").val();
+							c_slider = "slider_b";
+							break;
+		}
+
+		c_value = parseInt(c_value);
+
+	 	if (!isNaN(c_value)) {
+			if (c_value < 0) {
+				c_value = 0;
+			} else if (c_value > 255) {
+				c_value = 255;
+			}
+
+			$("#"+c_slider+"_text").val(c_value);
+			$("#"+c_slider)[0].MaterialSlider.change(c_value);
+
+			setColor(id, c_value);
+		}
+	}
+}
+
+
+function setColor(c_channel, c_val) {
+	mainMeans[3 * mainActiveColor + c_channel] = c_val;
+
+	$("#box"+mainActiveColor).css("background", "rgb(" + mainMeans[3 * mainActiveColor]			+ "," +
+																										 	 mainMeans[3 * mainActiveColor + 1] + "," +
+																										 	 mainMeans[3 * mainActiveColor + 2] + ")" );
 }
 
 
@@ -114,6 +204,8 @@ function genPal() {
 
 				$(".palette").append("<div class=\"colorSquare\" id=box"+boxId+"></div>");
 				$("#box"+boxId).css("background", color);
+				$("#box"+boxId).click(function(evt){readColor(evt.target.id)});
+
 			}
 		}
 	}

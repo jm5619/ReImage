@@ -40,6 +40,10 @@ body {
 /* palette setting */
 #palette_setting_holder {
   display: inline-block;
+  vertical-align: top;
+}
+#field_colors {
+  width: 220pt;
 }
 #gen_pal {
   margin-right: 20pt;
@@ -47,6 +51,55 @@ body {
 #percent_done {
   margin-left: 8pt;
 }
+
+/* palette recoloring */
+#c_sliders_holder {
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 6pt;
+}
+
+.slider_and_text_holder {
+  display: block;
+}
+.c_slider_holder {
+  display: inline-block;
+  width: 200pt;
+
+  margin-bottom: 5pt;
+  margin-top: 5pt;
+}
+.slider_color {
+  display: inline-block;
+  width: 200pt;
+}
+.slider_text {
+  display: inline-block;
+  padding-top: 0pt;
+  width: 24pt;
+}
+
+#slider_r_text {
+  border-radius: 2pt;
+  background: #fff1f1;
+}
+#slider_g_text {
+  border-radius: 2pt;
+  background: #f1fff1;
+}
+#slider_b_text {
+  border-radius: 2pt;
+  background: #f1f1ff;
+}
+
+.slider_text>.mdl-textfield__label {
+
+}
+#slider_r {
+
+}
+
+/* palette itself */
 .palette {
   margin-top: 10pt;
 }
@@ -58,8 +111,14 @@ body {
 
   margin: 1pt;
 }
+.colorSquare:hover {
+  filter: brightness(110%)
+}
 
 /* main controls */
+#progress_holder {
+  display: inline-block;
+}
 #iterations {
   margin-left: 8pt;
 }

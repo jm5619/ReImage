@@ -59,13 +59,56 @@
                 </div>
                 <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored mdl-js-ripple-effect"
                         id="set_slots" onclick="setSlots()">
-                  <i class="material-icons">done</i>
+                  <i class="material-icons">save</i>
                 </button>
               </div>
 
               <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored"
                       id="gen_pal" onclick="genPal()">Generate palette</button>
-              Progress: <span id="percent_done">0%</span>
+              <div id="progress_holder">
+                Progress: <span id="percent_done">0%</span>
+              </div>
+            </div>
+
+            <div id="c_sliders_holder">
+              <div class="slider_and_text_holder">
+                <div class="c_slider_holder">
+                  <input id="slider_r" class="slider_color mdl-slider mdl-js-slider" type="range" min="0" max="255" value="0" tabindex="0"
+                            oninput="setColorSlider(0)">
+                </div>
+                <div class="slider_text mdl-textfield mdl-js-textfield">
+                  <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="slider_r_text"
+                                oninput="setColorText(0)">
+                  <label class="mdl-textfield__label" for="slider_r_text_inner"></label>
+                  <span class="mdl-textfield__error">NaN</span>
+                </div>
+              </div>
+
+              <div class="slider_and_text_holder">
+                <div class="c_slider_holder">
+                  <input id="slider_g" class="slider_color mdl-slider mdl-js-slider" type="range" min="0" max="255" value="0" tabindex="0"
+                            oninput="setColorSlider(1)">
+                </div>
+                <div class="slider_text mdl-textfield mdl-js-textfield">
+                  <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="slider_g_text"
+                                oninput="setColorText(1)">
+                  <label class="mdl-textfield__label" for="slider_g_text_inner"></label>
+                  <span class="mdl-textfield__error">NaN</span>
+                </div>
+              </div>
+
+              <div class="slider_and_text_holder">
+                <div class="c_slider_holder">
+                  <input id="slider_b" class="slider_color mdl-slider mdl-js-slider" type="range" min="0" max="255" value="0" tabindex="0"
+                            oninput="setColorSlider(2)">
+                </div>
+                <div class="slider_text mdl-textfield mdl-js-textfield">
+                  <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="slider_b_text"
+                                oninput="setColorText(2)">
+                  <label class="mdl-textfield__label" for="slider_b_text_inner"></label>
+                  <span class="mdl-textfield__error">NaN</span>
+                </div>
+              </div>
             </div>
 
             <div class="palette"></div>
