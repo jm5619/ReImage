@@ -1,17 +1,31 @@
 var draw;
 var drawWorker;
 var mainMeans;
+var mainDrawMode = 1;								// draw mode: 0 ... rectangles, 1 ... rotated lines
+var mainSizes = [20, 30, 2, 2];			// sizes = [sizeMinH, sizeMaxH, sizeMinW, sizeMaxW];
+var mainColorMargins = [0, 0, 0];		// margins = intervals, [R, G, B]
+var mainColorMode = 2;							// color modes: 0 ... random, 1 ... palette exact, 2 ... palette with intervals
 
 var mainSlots = 5;
 var mainActiveColor = -1;
 
 $( document ).ready(function() {
+	draw = true;
+	$("#iterations").text(0);
+
 	$("#slot_count").keypress(function(e) {
 		if(e.which == 13) setSlots();
 	});
+
+	setIntervalSlider(0);
+	setIntervalSlider(1);
+	setIntervalSlider(2);
 });
 
 function reimage() {
+	document.getElementById("toggle").innerHTML = "Pause";
+	draw = false;
+
 	var canvas = document.getElementById("canvas");
 	var canvasOrig = document.getElementById("canvas_orig");
 	var ctx = canvas.getContext("2d");
@@ -37,13 +51,6 @@ function reimage() {
 	console.log(imgArrOrig);
 
 	/* --- begin drawing --- */
-
-	// sizes = [sizeMinH, sizeMaxH, sizeMinW, sizeMaxW];
-	var drawMode = 1;
-	var sizes = [20, 30, 2, 2];
-	var colorMargins = [50, 50, 50];
-	var colorMode = 2;
-
 	drawWorker = new Worker("scripts/drawWorker.js");
 
 	drawWorker.onmessage = function(msg) {
@@ -52,15 +59,15 @@ function reimage() {
 		}
 
 		imageData = new ImageData(msg.data.imgArr, imageData.width, imageData.height);
-		document.getElementById("iterations").innerHTML = msg.data.counter.toLocaleString();
+		$("#iterations").text(msg.data.counter.toLocaleString());
 		ctx.putImageData(imageData, 0, 0);
 	};
 
 	console.log(mainMeans);
 	draw = true;
-	drawWorker.postMessage({"first":true, "drawMode":drawMode, "imgArr":imgArr, "imgArrOrig":imgArrOrig,
-													"width":imageData.width, "height":imageData.height, "colorMode":colorMode, "means":mainMeans,
-													"sizes":sizes, "colorMargins":colorMargins});
+	drawWorker.postMessage({"first":true, "drawMode":mainDrawMode, "imgArr":imgArr, "imgArrOrig":imgArrOrig,
+													"width":imageData.width, "height":imageData.height, "colorMode":mainColorMode, "means":mainMeans,
+													"sizes":mainSizes, "colorMargins":mainColorMargins});
 }
 
 
@@ -168,6 +175,60 @@ function setColor(c_channel, c_val) {
 	$("#box"+mainActiveColor).css("background", "rgb(" + mainMeans[3 * mainActiveColor]			+ "," +
 																										 	 mainMeans[3 * mainActiveColor + 1] + "," +
 																										 	 mainMeans[3 * mainActiveColor + 2] + ")" );
+}
+
+
+function setIntervalSlider(id) {
+	var i_value;
+	switch (id) {
+		case 0:	i_value = $("#i_slider_r").val();
+						$("#i_slider_r_text").val(i_value);
+						break;
+		case 1:	i_value = $("#i_slider_g").val();
+						$("#i_slider_g_text").val(i_value);
+						break;
+		case 2:	i_value = $("#i_slider_b").val();
+						$("#i_slider_b_text").val(i_value);
+						break;
+	}
+	setInterval(id, i_value);
+}
+
+
+function setIntervalText(id) {
+	var i_value;
+	var i_slider;
+	switch (id) {
+		case 0:	i_value = $("#i_slider_r_text").val();
+						i_slider = "i_slider_r";
+						break;
+		case 1:	i_value = $("#i_slider_g_text").val();
+						i_slider = "i_slider_g";
+						break;
+		case 2:	i_value = $("#i_slider_b_text").val();
+						i_slider = "i_slider_b";
+						break;
+	}
+
+	i_value = parseInt(i_value);
+
+ 	if (!isNaN(i_value)) {
+		if (i_value < 0) {
+			i_value = 0;
+		} else if (i_value > 255) {
+			i_value = 255;
+		}
+
+		$("#"+i_slider+"_text").val(i_value);
+		$("#"+i_slider)[0].MaterialSlider.change(i_value);
+
+		setInterval(id, i_value);
+	}
+}
+
+
+function setInterval(c_channel, i_val) {
+	mainColorMargins[c_channel] = i_val;
 }
 
 

@@ -39,7 +39,7 @@
       <div class="page-content">  <!-- ---- CONTENT ---------------------------------------------------------------- -->
 
         <div class="controls card-wide mdl-card mdl-shadow--4dp">
-          <div class="upload-area control-section">
+          <div class="upload_area control_section">
             <input type="file" id="selector" onChange="loadFile(event)">
             <label for="selector" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
               Upload image
@@ -49,8 +49,8 @@
         </div>
 
         <div class="controls card-wide mdl-card mdl-shadow--4dp">
-          <div class="palette-options control-section">
-            <div id="palette_setting_holder">
+          <div class="palette_options control_section">
+            <div id="palette_setting_holder" class="holder">
               <div id="slot_holder">
                 <div id="palette_setting_title">
                   Configure and generate a color palette
@@ -74,46 +74,93 @@
               </div>
             </div>
 
-            <div id="c_sliders_holder">
-              <div id="c_sliders_title">
+
+            <div id="sliders_holder" class="holder">
+              <div id="sliders_title">
                 Change color of selected palette slot
               </div>
 
               <div class="slider_and_text_holder">
-                <div class="c_slider_holder">
+                <div class="slider_holder">
                   <input id="slider_r" class="slider_color mdl-slider mdl-js-slider" type="range" min="0" max="255" value="0" tabindex="0"
                             oninput="setColorSlider(0)">
                 </div>
                 <div class="slider_text mdl-textfield mdl-js-textfield">
-                  <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="slider_r_text"
-                                oninput="setColorText(0)">
-                  <label class="mdl-textfield__label" for="slider_r_text_inner"></label>
+                  <input id="slider_r_text" class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?"
+                            oninput="setColorText(0)">
+                  <label class="mdl-textfield__label" for="slider_r_text"></label>
                   <span class="mdl-textfield__error">NaN</span>
                 </div>
               </div>
 
               <div class="slider_and_text_holder">
-                <div class="c_slider_holder">
+                <div class="slider_holder">
                   <input id="slider_g" class="slider_color mdl-slider mdl-js-slider" type="range" min="0" max="255" value="0" tabindex="0"
                             oninput="setColorSlider(1)">
                 </div>
                 <div class="slider_text mdl-textfield mdl-js-textfield">
-                  <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="slider_g_text"
-                                oninput="setColorText(1)">
-                  <label class="mdl-textfield__label" for="slider_g_text_inner"></label>
+                  <input id="slider_g_text" class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?"
+                            oninput="setColorText(1)">
+                  <label class="mdl-textfield__label" for="slider_g_text"></label>
                   <span class="mdl-textfield__error">NaN</span>
                 </div>
               </div>
 
               <div class="slider_and_text_holder">
-                <div class="c_slider_holder">
+                <div class="slider_holder">
                   <input id="slider_b" class="slider_color mdl-slider mdl-js-slider" type="range" min="0" max="255" value="0" tabindex="0"
                             oninput="setColorSlider(2)">
                 </div>
                 <div class="slider_text mdl-textfield mdl-js-textfield">
-                  <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="slider_b_text"
-                                oninput="setColorText(2)">
-                  <label class="mdl-textfield__label" for="slider_b_text_inner"></label>
+                  <input id="slider_b_text" class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?"
+                            oninput="setColorText(2)">
+                  <label class="mdl-textfield__label" for="slider_b_text"></label>
+                  <span class="mdl-textfield__error">NaN</span>
+                </div>
+              </div>
+            </div>
+
+
+            <div id="sliders_holder" class="holder">
+              <div id="sliders_title">
+                Change palette deviation intervals
+              </div>
+
+              <div class="slider_and_text_holder">
+                <div class="slider_holder">
+                  <input id="i_slider_r" class="slider_color mdl-slider mdl-js-slider" type="range" min="0" max="255" value="0" tabindex="0"
+                            oninput="setIntervalSlider(0)">
+                </div>
+                <div class="slider_text mdl-textfield mdl-js-textfield">
+                  <input id="i_slider_r_text" class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?"
+                            oninput="setIntervalText(0)">
+                  <label class="mdl-textfield__label" for="i_slider_r_text"></label>
+                  <span class="mdl-textfield__error">NaN</span>
+                </div>
+              </div>
+
+              <div class="slider_and_text_holder">
+                <div class="slider_holder">
+                  <input id="i_slider_g" class="slider_color mdl-slider mdl-js-slider" type="range" min="0" max="255" value="0" tabindex="0"
+                            oninput="setIntervalSlider(1)">
+                </div>
+                <div class="slider_text mdl-textfield mdl-js-textfield">
+                  <input id="i_slider_g_text" class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?"
+                            oninput="setIntervalText(1)">
+                  <label class="mdl-textfield__label" for="i_slider_g_text"></label>
+                  <span class="mdl-textfield__error">NaN</span>
+                </div>
+              </div>
+
+              <div class="slider_and_text_holder">
+                <div class="slider_holder">
+                  <input id="i_slider_b" class="slider_color mdl-slider mdl-js-slider" type="range" min="0" max="255" value="0" tabindex="0"
+                            oninput="setIntervalSlider(2)">
+                </div>
+                <div class="slider_text mdl-textfield mdl-js-textfield">
+                  <input id="i_slider_b_text" class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?"
+                            oninput="setIntervalText(2)">
+                  <label class="mdl-textfield__label" for="i_slider_b_text"></label>
                   <span class="mdl-textfield__error">NaN</span>
                 </div>
               </div>
@@ -124,7 +171,7 @@
         </div>
 
         <div class="controls card-wide mdl-card mdl-shadow--4dp">
-          <div class="main-controls control-section">
+          <div class="main_controls control_section">
             <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
                     id="start" onclick="reimage()">Begin</button>
             <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored"

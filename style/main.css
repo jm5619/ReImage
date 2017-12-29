@@ -25,9 +25,12 @@ body {
 }
 
 /* CONTROLS -------------- */
-.control-section {
+.control_section {
   margin-top: 4pt;
   margin-bottom: 4pt;
+}
+.holder {
+  margin-left: 10pt;
 }
 
 /* uploading */
@@ -58,11 +61,11 @@ body {
 }
 
 /* palette recoloring */
-#c_sliders_title {
+#sliders_title {
   margin-left: 15pt;
   margin-bottom: 10pt;
 }
-#c_sliders_holder {
+#sliders_holder {
   display: inline-block;
   vertical-align: top;
   margin-top: 6pt;
@@ -70,7 +73,7 @@ body {
 .slider_and_text_holder {
   display: block;
 }
-.c_slider_holder {
+.slider_holder {
   display: inline-block;
   width: 200pt;
 
@@ -99,6 +102,22 @@ body {
   border-radius: 2pt;
   background: #f1f1ff;
 }
+
+
+/* palette deviation intervals */
+#i_slider_r_text {
+  border-radius: 2pt;
+  background: #fff1f1;
+}
+#i_slider_g_text {
+  border-radius: 2pt;
+  background: #f1fff1;
+}
+#i_slider_b_text {
+  border-radius: 2pt;
+  background: #f1f1ff;
+}
+
 
 /* palette itself */
 .palette {
