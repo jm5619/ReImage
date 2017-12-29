@@ -49,13 +49,13 @@ onmessage = function(msg) {
 	while ((new Date()).getTime() < endTime) {
 		switch (colorMode) {
 			case 1:	index = Math.floor(Math.random() * means.length);
-							rgb = [means[index], means[index + 1], means[index + 2]];
+							rgb = [means[3 * index], means[3 * index + 1], means[3 * index + 2]];
 							break;
 
 			case 2:	index = Math.floor(Math.random() * means.length);
-							rgb = [means[index] + Math.random() * colorMargins[0] - colorMargins[0] / 2,
-										 means[index + 1] + Math.random() * colorMargins[1] - colorMargins[1] / 2,
-										 means[index + 2] + Math.random() * colorMargins[2] - colorMargins[2] / 2];
+							rgb = [means[3 * index] + Math.random() * colorMargins[0] - colorMargins[0] / 2,
+										 means[3 * index + 1] + Math.random() * colorMargins[1] - colorMargins[1] / 2,
+										 means[3 * index + 2] + Math.random() * colorMargins[2] - colorMargins[2] / 2];
 							break;
 
 			default:	rgb = [Math.random() * 255, Math.random() * 255, Math.random() * 255];		// case 0:

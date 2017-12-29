@@ -50,6 +50,14 @@ body {
   vertical-align: top;
   margin-top: 6pt;
 }
+
+#radio_palette_outer {
+  margin-left: 40pt;
+}
+#radio_random_outer {
+  margin-left: 20pt;
+}
+
 #field_colors {
   width: 220pt;
 }
@@ -88,6 +96,9 @@ body {
   display: inline-block;
   padding-top: 0pt;
   width: 24pt;
+}
+.slider_text_input {
+  text-align: center;
 }
 
 #slider_r_text {

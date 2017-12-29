@@ -9,9 +9,23 @@ var mainColorMode = 2;							// color modes: 0 ... random, 1 ... palette exact, 
 var mainSlots = 5;
 var mainActiveColor = -1;
 
-$( document ).ready(function() {
+$(document).ready(function() {
 	draw = true;
 	$("#iterations").text(0);
+
+	$(".color_radio_button").change(function() {
+		var snackbarContainer = document.querySelector('#toast_notification');
+
+    if ($(this).val() == 1) {
+			mainColorMode = 2;
+			var data = {message: "Using colors from palette.", timeout: 800};
+			snackbarContainer.MaterialSnackbar.showSnackbar(data);
+    } else {
+			mainColorMode = 0;
+			var data = {message: "Using random colors.", timeout: 800};
+			snackbarContainer.MaterialSnackbar.showSnackbar(data);
+		}
+	});
 
 	$("#slot_count").keypress(function(e) {
 		if(e.which == 13) setSlots();
@@ -41,8 +55,36 @@ function reimage() {
 	canvas.width = imageData.width;
 	canvas.height = imageData.height;
 
-	for (var i = 3; i < imgArr.length; i += 4) {
-		imgArr[i] = 255;
+	// set canvas background color
+	if (mainColorMode > 0) {
+		var darkest = 0;
+		var darkestVal = mainMeans[0] + mainMeans[1] + mainMeans[2];
+		for (var i = 3; i < darkestVal.length * 3; i += 3) {
+			var colSum = mainMeans[i] + mainMeans[i + 1] + mainMeans[i + 2];
+			if (colSum < darkestVal) {
+				darkest = i;
+				darkestVal = colSum;
+			}
+		}
+
+		var rgbDark = [mainMeans[darkest], mainMeans[darkest + 1], mainMeans[darkest + 2], 255];
+
+		if (mainColorMode > 1) {
+			console.log("AYY LMAO MY DUDES");
+			for (var i = 0; i < 3; i++) {
+				rgbDark[i] = Math.round(rgbDark[i] - mainColorMargins[i] / 2);
+			}
+		}
+
+		for (var i = 0; i < imgArr.length; i += 4) {
+			for (var j = 0; j < 4; j++) {
+				imgArr[i + j] = rgbDark[j];
+			}
+		}
+	} else {
+		for (var i = 3; i < imgArr.length; i += 4) {
+			imgArr[i] = 255;
+		}
 	}
 
 	ctx.putImageData(imageData, 0, 0);
@@ -51,6 +93,7 @@ function reimage() {
 	console.log(imgArrOrig);
 
 	/* --- begin drawing --- */
+	if (typeof drawWorker != 'undefined') drawWorker.terminate();
 	drawWorker = new Worker("scripts/drawWorker.js");
 
 	drawWorker.onmessage = function(msg) {
@@ -85,7 +128,7 @@ function setSlots() {
 
 		$("#slot_count").val(mainSlots);
 
-		var snackbarContainer = document.querySelector('#slots_notification');
+		var snackbarContainer = document.querySelector('#toast_notification');
 		'use strict';
 		var data = {message: "The palette will contain "+mainSlots+" colors."};
 		snackbarContainer.MaterialSnackbar.showSnackbar(data);

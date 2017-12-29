@@ -56,6 +56,18 @@
                   Configure and generate a color palette
                 </div>
 
+                <div id="color_radio_holder">
+                  Colors:
+                  <label id="radio_palette_outer" class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="radio_palette">
+                    <input type="radio" id="radio_palette" class="color_radio_button mdl-radio__button" name="options" value="1" checked>
+                    <span class="mdl-radio__label">Palette</span>
+                  </label>
+                  <label id="radio_random_outer" class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="radio_random">
+                    <input type="radio" id="radio_random" class="color_radio_button mdl-radio__button" name="options" value="2">
+                    <span class="mdl-radio__label">Random</span>
+                  </label>
+                </div>
+
                 <div id="field_colors"   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                   <input id="slot_count" class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?">
                   <label class="mdl-textfield__label" for="slot_count">Number of colors in palette...</label>
@@ -67,11 +79,14 @@
                 </button>
               </div>
 
-              <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored"
-                      id="gen_pal" onclick="genPal()">Generate palette</button>
-              <div id="progress_holder">
-                Progress: <span id="percent_done">0%</span>
+              <div>
+                <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored"
+                        id="gen_pal" onclick="genPal()">Generate palette</button>
+                <div id="progress_holder">
+                  Progress: <span id="percent_done">0%</span>
+                </div>
               </div>
+
             </div>
 
 
@@ -86,7 +101,7 @@
                             oninput="setColorSlider(0)">
                 </div>
                 <div class="slider_text mdl-textfield mdl-js-textfield">
-                  <input id="slider_r_text" class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?"
+                  <input id="slider_r_text" class="slider_text_input mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?"
                             oninput="setColorText(0)">
                   <label class="mdl-textfield__label" for="slider_r_text"></label>
                   <span class="mdl-textfield__error">NaN</span>
@@ -99,7 +114,7 @@
                             oninput="setColorSlider(1)">
                 </div>
                 <div class="slider_text mdl-textfield mdl-js-textfield">
-                  <input id="slider_g_text" class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?"
+                  <input id="slider_g_text" class="slider_text_input mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?"
                             oninput="setColorText(1)">
                   <label class="mdl-textfield__label" for="slider_g_text"></label>
                   <span class="mdl-textfield__error">NaN</span>
@@ -112,7 +127,7 @@
                             oninput="setColorSlider(2)">
                 </div>
                 <div class="slider_text mdl-textfield mdl-js-textfield">
-                  <input id="slider_b_text" class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?"
+                  <input id="slider_b_text" class="slider_text_input mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?"
                             oninput="setColorText(2)">
                   <label class="mdl-textfield__label" for="slider_b_text"></label>
                   <span class="mdl-textfield__error">NaN</span>
@@ -132,7 +147,7 @@
                             oninput="setIntervalSlider(0)">
                 </div>
                 <div class="slider_text mdl-textfield mdl-js-textfield">
-                  <input id="i_slider_r_text" class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?"
+                  <input id="i_slider_r_text" class="slider_text_input mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?"
                             oninput="setIntervalText(0)">
                   <label class="mdl-textfield__label" for="i_slider_r_text"></label>
                   <span class="mdl-textfield__error">NaN</span>
@@ -145,7 +160,7 @@
                             oninput="setIntervalSlider(1)">
                 </div>
                 <div class="slider_text mdl-textfield mdl-js-textfield">
-                  <input id="i_slider_g_text" class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?"
+                  <input id="i_slider_g_text" class="slider_text_input mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?"
                             oninput="setIntervalText(1)">
                   <label class="mdl-textfield__label" for="i_slider_g_text"></label>
                   <span class="mdl-textfield__error">NaN</span>
@@ -158,7 +173,7 @@
                             oninput="setIntervalSlider(2)">
                 </div>
                 <div class="slider_text mdl-textfield mdl-js-textfield">
-                  <input id="i_slider_b_text" class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?"
+                  <input id="i_slider_b_text" class="slider_text_input mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?"
                             oninput="setIntervalText(2)">
                   <label class="mdl-textfield__label" for="i_slider_b_text"></label>
                   <span class="mdl-textfield__error">NaN</span>
@@ -192,7 +207,7 @@
         </div>
 
         <!-- Toasts -->
-        <div id="slots_notification" class="mdl-js-snackbar mdl-snackbar">
+        <div id="toast_notification" class="mdl-js-snackbar mdl-snackbar">
           <div class="mdl-snackbar__text"></div>
           <button class="mdl-snackbar__action" type="button"></button>
         </div>
