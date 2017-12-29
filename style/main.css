@@ -1,5 +1,6 @@
 body {
   background: #ddd;
+  color: #485c66;
 }
 
 .page-content {
@@ -38,9 +39,13 @@ body {
 }
 
 /* palette setting */
+#palette_setting_title {
+  margin-bottom: 10pt;
+}
 #palette_setting_holder {
   display: inline-block;
   vertical-align: top;
+  margin-top: 6pt;
 }
 #field_colors {
   width: 220pt;
@@ -53,12 +58,15 @@ body {
 }
 
 /* palette recoloring */
+#c_sliders_title {
+  margin-left: 15pt;
+  margin-bottom: 10pt;
+}
 #c_sliders_holder {
   display: inline-block;
   vertical-align: top;
   margin-top: 6pt;
 }
-
 .slider_and_text_holder {
   display: block;
 }
@@ -90,13 +98,6 @@ body {
 #slider_b_text {
   border-radius: 2pt;
   background: #f1f1ff;
-}
-
-.slider_text>.mdl-textfield__label {
-
-}
-#slider_r {
-
 }
 
 /* palette itself */

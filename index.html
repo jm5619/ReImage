@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>ReImager</title>
+  <title>reimager</title>
 
   <link rel="stylesheet" href="style/material.min.css">
   <link rel="stylesheet" href="style/main.css">
@@ -20,7 +20,7 @@
     <header class="mdl-layout__header mdl-layout__header--scroll">
       <div class="mdl-layout__header-row">
         <!-- Title -->
-        <span class="mdl-layout-title">ReImager</span>
+        <span class="mdl-layout-title">reimager</span>
         <!-- Add spacer, to align navigation to the right -->
         <div class="mdl-layout-spacer"></div>
         <!-- Navigation -->
@@ -30,7 +30,7 @@
       </div>
     </header>
     <div class="mdl-layout__drawer">
-      <span class="mdl-layout-title">ReImager</span>
+      <span class="mdl-layout-title">reimager</span>
       <nav class="mdl-navigation">
         <a class="mdl-navigation__link" href="">RELOAD</a>
       </nav>
@@ -52,6 +52,10 @@
           <div class="palette-options control-section">
             <div id="palette_setting_holder">
               <div id="slot_holder">
+                <div id="palette_setting_title">
+                  Configure and generate a color palette
+                </div>
+
                 <div id="field_colors"   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                   <input id="slot_count" class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?">
                   <label class="mdl-textfield__label" for="slot_count">Number of colors in palette...</label>
@@ -71,6 +75,10 @@
             </div>
 
             <div id="c_sliders_holder">
+              <div id="c_sliders_title">
+                Change color of selected palette slot
+              </div>
+
               <div class="slider_and_text_holder">
                 <div class="c_slider_holder">
                   <input id="slider_r" class="slider_color mdl-slider mdl-js-slider" type="range" min="0" max="255" value="0" tabindex="0"
