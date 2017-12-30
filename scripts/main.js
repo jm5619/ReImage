@@ -5,6 +5,7 @@ var mainDrawMode = 0;								// draw mode: 0 ... squares, 1 ... rectangles, 2 ..
 var mainSizes = [1, 1, 1, 1];				// sizes = [sizeMinH, sizeMaxH, sizeMinW, sizeMaxW];
 var mainColorMargins = [0, 0, 0];		// margins = intervals, [R, G, B]
 var mainColorMode = 2;							// color modes: 0 ... random, 1 ... palette exact, 2 ... palette with intervals
+var imageUp = false;
 var paletteGenerated = false;
 
 var squareSize = [2, 4];
@@ -25,6 +26,7 @@ $(document).ready(function() {
 
 		switch (compval) {
 			case 1: mainColorMode = 2;
+							if (!paletteGenerated) genPal();
 							data = {message: "Using colors from palette.", timeout: 800};
 							break;
 			case 2:	mainColorMode = 0;
@@ -85,6 +87,8 @@ $(document).ready(function() {
 });
 
 function reimage() {
+	if (!imageUp) return;
+
 	document.getElementById("toggle").innerHTML = "Pause";
 	draw = false;
 
@@ -436,6 +440,8 @@ function setInterval(c_channel, i_val) {
 
 
 function genPal() {
+	if (!imageUp) return;
+
 	var canvasOrig = document.getElementById("canvas_orig");
 	var ctxOrig = canvasOrig.getContext("2d");
 	var imgOrig = ctxOrig.getImageData(0, 0, canvasOrig.width, canvasOrig.height);
@@ -519,6 +525,8 @@ function loadFile(evt) {
 				var ctx = canvasOrig.getContext("2d");
 
 				ctx.drawImage(img,0,0);
+
+				imageUp = true;
 			}
 
 			img.src = evt.target.result;
