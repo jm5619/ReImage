@@ -36,9 +36,6 @@ body {
   margin-top: 4pt;
   margin-bottom: 4pt;
 }
-.holder {
-  margin-left: 10pt;
-}
 
 /* titles */
 .title_icon {
@@ -62,15 +59,24 @@ p {
   margin-left: 8pt;
 }
 
-/* palette setting */
-#palette_setting_title {
+/* settings general */
+.setting_title {
   margin-bottom: 10pt;
 }
+.holder {
+  width: 240pt;
 
-#palette_setting_holder {
   display: inline-block;
   vertical-align: top;
+
   margin-top: 6pt;
+  margin-left: 10pt;
+  margin-bottom: 6pt;
+}
+
+/* palette setting */
+#field_colors {
+  width: 200pt;
 }
 
 #radio_palette_outer {
@@ -80,9 +86,6 @@ p {
   margin-left: 20pt;
 }
 
-#field_colors {
-  width: 220pt;
-}
 #gen_pal {
   margin-right: 20pt;
 }
@@ -91,14 +94,6 @@ p {
 }
 
 /* palette recoloring */
-#sliders_title, #i_sliders_title {
-  margin-bottom: 10pt;
-}
-#sliders_holder, #i_sliders_holder {
-  display: inline-block;
-  vertical-align: top;
-  margin-top: 6pt;
-}
 .slider_and_text_holder {
   display: block;
 }
@@ -148,6 +143,53 @@ p {
 #i_slider_b_text {
   border-radius: 2pt;
   background: #f1f1ff;
+}
+
+
+/* shapes */
+#rect_settings_holder {
+  display: none;
+}
+#line_settings_holder {
+  display: none;
+}
+
+#radio_square_header {
+  display: inline-block;
+  width: 50pt;
+}
+#radio_rect_outer {
+  margin-left: 10pt;
+}
+#radio_line_outer {
+  margin-left: 10pt;
+}
+#radio_line_vert_outer {
+  margin-left: 10pt;
+}
+#radio_line_hori_outer {
+  margin-left: 10pt;
+}
+
+.shape_setting_line {
+  margin-top: 10pt;
+}
+.shape_setting_header {
+  display: inline-block;
+  width: 50pt;
+}
+.shape_setting_text {
+  display: inline-block;
+}
+.shape_setting_text_right {
+  margin-left: 10pt;
+}
+.shape_setting_field {
+  display: inline-block;
+  width: 24pt;
+
+  padding-top: 0pt;
+  margin-left: 6pt;
 }
 
 

@@ -1,10 +1,16 @@
 var draw;
 var drawWorker;
 var mainMeans;
-var mainDrawMode = 1;								// draw mode: 0 ... rectangles, 1 ... rotated lines
-var mainSizes = [20, 30, 2, 2];			// sizes = [sizeMinH, sizeMaxH, sizeMinW, sizeMaxW];
+var mainDrawMode = 0;								// draw mode: 0 ... squares, 1 ... rectangles, 2 ... rotated lines
+var mainSizes = [1, 1, 1, 1];				// sizes = [sizeMinH, sizeMaxH, sizeMinW, sizeMaxW];
 var mainColorMargins = [0, 0, 0];		// margins = intervals, [R, G, B]
 var mainColorMode = 2;							// color modes: 0 ... random, 1 ... palette exact, 2 ... palette with intervals
+var paletteGenerated = false;
+
+var squareSize = [2, 4];
+var rectSize = [2, 6, 2, 6];
+var lineSize = [20, 30];
+var lineDir = 0;
 
 var mainSlots = 5;
 var mainActiveColor = -1;
@@ -15,16 +21,49 @@ $(document).ready(function() {
 
 	$(".color_radio_button").change(function() {
 		var snackbarContainer = document.querySelector('#toast_notification');
+		var compval = parseInt($(this).val());
 
-    if ($(this).val() == 1) {
-			mainColorMode = 2;
-			var data = {message: "Using colors from palette.", timeout: 800};
-			snackbarContainer.MaterialSnackbar.showSnackbar(data);
-    } else {
-			mainColorMode = 0;
-			var data = {message: "Using random colors.", timeout: 800};
-			snackbarContainer.MaterialSnackbar.showSnackbar(data);
+		switch (compval) {
+			case 1: mainColorMode = 2;
+							data = {message: "Using colors from palette.", timeout: 800};
+							break;
+			case 2:	mainColorMode = 0;
+							data = {message: "Using random colors.", timeout: 800};
+							break;
+
+			case 3: mainDrawMode = 0;
+							$("#square_settings_holder").css("display", "block");
+							$("#rect_settings_holder").css("display", "none");
+							$("#line_settings_holder").css("display", "none");
+							data = {message: "Using squares for basic shape.", timeout: 1000};
+							break;
+			case 4: mainDrawMode = 1;
+							$("#square_settings_holder").css("display", "none");
+							$("#rect_settings_holder").css("display", "block");
+							$("#line_settings_holder").css("display", "none");
+							data = {message: "Using rectangles for basic shape.", timeout: 1000};
+							break;
+			case 5: mainDrawMode = 2;
+							$("#square_settings_holder").css("display", "none");
+							$("#rect_settings_holder").css("display", "none");
+							$("#line_settings_holder").css("display", "block");
+							data = {message: "Using lines for basic shape.", timeout: 1000};
+							break;
+
+			case 6: mainDrawMode = 2;
+							lineDir = 0;
+							data = {message: "Lines will face all directions.", timeout: 1000};
+							break;
+			case 7: mainDrawMode = 2;
+							lineDir = 1;
+							data = {message: "Lines will be placed vertically.", timeout: 1000};
+							break;
+			case 8: mainDrawMode = 2;
+							lineDir = 2;
+							data = {message: "Lines will be placed horizontally.", timeout: 1000};
+							break;
 		}
+		snackbarContainer.MaterialSnackbar.showSnackbar(data);
 	});
 
 	$("#slot_count").keypress(function(e) {
@@ -34,6 +73,15 @@ $(document).ready(function() {
 	setIntervalSlider(0);
 	setIntervalSlider(1);
 	setIntervalSlider(2);
+
+	$("#shape_square_min").val(squareSize[0]);
+	$("#shape_square_max").val(squareSize[1]);
+	$("#shape_rect_minh").val(rectSize[0]);
+	$("#shape_rect_maxh").val(rectSize[1]);
+	$("#shape_rect_minw").val(rectSize[2]);
+	$("#shape_rect_maxw").val(rectSize[3]);
+	$("#shape_line_min").val(lineSize[0]);
+	$("#shape_line_max").val(lineSize[1]);
 });
 
 function reimage() {
@@ -48,18 +96,17 @@ function reimage() {
 	imgOrig = ctxOrig.getImageData(0, 0, canvasOrig.width, canvasOrig.height);
 	var imgArrOrig = imgOrig.data;
 
-
 	var imageData = ctx.createImageData(imgOrig);
 	var imgArr = imageData.data;
 
 	canvas.width = imageData.width;
 	canvas.height = imageData.height;
 
-	// set canvas background color
-	if (mainColorMode > 0) {
+	/* --- set canvas background color --- */
+	if (paletteGenerated && mainColorMode > 0) {
 		var darkest = 0;
 		var darkestVal = mainMeans[0] + mainMeans[1] + mainMeans[2];
-		for (var i = 3; i < darkestVal.length * 3; i += 3) {
+		for (var i = 3; i < mainMeans.length; i += 3) {
 			var colSum = mainMeans[i] + mainMeans[i + 1] + mainMeans[i + 2];
 			if (colSum < darkestVal) {
 				darkest = i;
@@ -88,8 +135,36 @@ function reimage() {
 
 	ctx.putImageData(imageData, 0, 0);
 
-	console.log(imgArr);
-	console.log(imgArrOrig);
+	/* --- load appropriate dimensions --- */
+	console.log(mainDrawMode);
+	switch (mainDrawMode) {
+		case 0:	mainSizes[0] = squareSize[0];
+						mainSizes[1] = squareSize[1];
+						console.log("ASDF");
+						break;
+		case 1:	mainSizes[0] = rectSize[0];
+						mainSizes[1] = rectSize[1];
+						mainSizes[2] = rectSize[2];
+						mainSizes[3] = rectSize[3];
+						break;
+		case 2:	if (lineDir == 0) {
+							mainSizes[0] = lineSize[0];
+							mainSizes[1] = lineSize[1];
+						} else if (lineDir == 1) {
+							mainSizes[0] = lineSize[0];
+							mainSizes[1] = lineSize[1];
+							mainSizes[2] = 1;
+							mainSizes[3] = 1;
+							mainDrawMode = 1;
+						} else  {
+							mainSizes[0] = 1;
+							mainSizes[1] = 1;
+							mainSizes[2] = lineSize[0];
+							mainSizes[3] = lineSize[1];
+							mainDrawMode = 1;
+						}
+						break;
+	}
 
 	/* --- begin drawing --- */
 	if (typeof drawWorker != 'undefined') drawWorker.terminate();
@@ -105,7 +180,7 @@ function reimage() {
 		ctx.putImageData(imageData, 0, 0);
 	};
 
-	console.log(mainMeans);
+	console.log(mainSizes);
 	draw = true;
 	drawWorker.postMessage({"first":true, "drawMode":mainDrawMode, "imgArr":imgArr, "imgArrOrig":imgArrOrig,
 													"width":imageData.width, "height":imageData.height, "colorMode":mainColorMode, "means":mainMeans,
@@ -113,6 +188,92 @@ function reimage() {
 }
 
 
+/* SHAPE SETTERS --------- */
+function setSquare(val) {
+	var value;
+	if (val == 1) value = $("#shape_square_min").val();
+	else value = $("#shape_square_max").val();
+
+	value = parseInt(value);
+	if (!isNaN(value)) {
+		if (value < 0) {
+			value = 1;
+		} else if (value > 100) {
+			value = 100;
+		}
+
+		if (val == 1) {
+			$("#shape_square_min").val(value);
+			squareSize[0] = value;
+		} else {
+			$("#shape_square_max").val(value);
+			squareSize[1] = value;
+		}
+	}
+}
+
+
+function setRect(valPar) {
+	var value;
+	var val = parseInt(valPar)
+	switch (val) {
+		case 1:	value = $("#shape_rect_minh").val(); break;
+		case 2:	value = $("#shape_rect_maxh").val(); break;
+		case 3:	value = $("#shape_rect_minw").val(); break;
+		case 4:	value = $("#shape_rect_maxw").val(); break;
+	}
+
+	value = parseInt(value);
+	if (!isNaN(value)) {
+		if (value < 0) {
+			value = 1;
+		} else if (value > 100) {
+			value = 100;
+		}
+
+		switch (val) {
+			case 1:	$("#shape_rect_minh").val(value);
+							rectSize[0] = value;
+							break;
+			case 2:	$("#shape_rect_maxh").val(value);
+							rectSize[1] = value;
+							break;
+			case 3:	$("#shape_rect_minw").val(value);
+							rectSize[2] = value;
+							break;
+			case 4:	$("#shape_rect_maxw").val(value);
+							rectSize[3] = value;
+							break;
+		}
+	}
+}
+
+
+function setLine(val) {
+	var value;
+	if (val == 1) value = $("#shape_line_min").val();
+	else value = $("#shape_line_max").val();
+
+	value = parseInt(value);
+	if (!isNaN(value)) {
+		if (value < 0) {
+			value = 1;
+		} else if (value > 100) {
+			value = 100;
+		}
+
+		if (val == 1) {
+			$("#shape_line_min").val(value);
+			lineSize[0] = value;
+		} else {
+			$("#shape_line_max").val(value);
+			lineSize[1] = value;
+		}
+	}
+}
+
+
+/* PALETTE SETTING ------- */
 function setSlots() {
 	var num = parseInt($("#slot_count").val());
 
@@ -308,8 +469,9 @@ function genPal() {
 				$(".palette").append("<div class=\"colorSquare\" id=box"+boxId+"></div>");
 				$("#box"+boxId).css("background", color);
 				$("#box"+boxId).click(function(evt){readColor(evt.target.id)});
-
 			}
+
+			paletteGenerated = true;
 		}
 	}
 

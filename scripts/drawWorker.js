@@ -1,7 +1,8 @@
 var drawMode, sizeMinH, sizeMaxH, sizeMinW, sizeMaxW, sizeDiffH, sizeDiffW;
 /* draw modes
  *	0 ... squares
- *	1 ... rotated lines
+ *	1 ... rectangles
+ *	2 ... rotated lines
  */
 var imgArr, imgArrOrig, imgWidth, imgHeight;
 var iters, globalCounter;
@@ -63,9 +64,13 @@ onmessage = function(msg) {
 		}
 
 
-		if (drawMode == 0) {
-	    h = Math.random() * sizeDiffH + sizeMinH;
-	    w = Math.random() * sizeDiffW + sizeMinW;
+		if (drawMode < 2) {
+			h = Math.random() * sizeDiffH + sizeMinH;
+			if (drawMode == 0) {	// square
+				w = h;
+			} else {							// rectangle
+		    w = Math.random() * sizeDiffW + sizeMinW;
+			}
 	    length = h * w * 4;
 
 	    pos = Math.random() * (imgArr.length - length);
@@ -102,7 +107,7 @@ onmessage = function(msg) {
 	    }
 
 
-		} else if (drawMode == 1) {
+		} else if (drawMode == 2) {
 
 			var lineLen = Math.round(Math.random() * sizeDiffH + sizeMinH);				// length of line
 			var lineX = Math.floor(Math.random() * lineLen);											// width of box surrounding the line

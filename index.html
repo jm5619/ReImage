@@ -52,7 +52,7 @@
           <div class="palette_options control_section">
             <div id="palette_setting_holder" class="holder">
               <div id="slot_holder">
-                <div id="palette_setting_title">
+                <div id="palette_setting_title" class="setting_title">
                   <div id="palette_setting_title_icon" class="title_icon icon material-icons">info</div>
                   <div class="mdl-tooltip mdl-tooltip--large" for="palette_setting_title_icon">
                     Here you can select whether a palette of colors should be generated to be used in the image
@@ -95,8 +95,127 @@
             </div>
 
 
+            <div id="color_radio_holder" class="holder">
+              <div id="shape_title" class="setting_title">
+                <div id="shape_title_icon" class="title_icon icon material-icons">info</div>
+                <div class="mdl-tooltip mdl-tooltip--large" for="shape_title_icon">
+                Select the basic shape that will repeatedly be added to image. You can also set its preferred sizes.</div>
+                <div class="title_text"><p>Select basic shape</p></div>
+              </div>
+
+
+              <div id="radio_square_header">
+                Shape:
+              </div>
+              <label id="radio_square_outer" class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="radio_square">
+                <input type="radio" id="radio_square" class="color_radio_button mdl-radio__button" name="shapes" value="3" checked>
+                <span class="mdl-radio__label">Square</span>
+              </label>
+              <label id="radio_rect_outer" class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="radio_rect">
+                <input type="radio" id="radio_rect" class="color_radio_button mdl-radio__button" name="shapes" value="4">
+                <span class="mdl-radio__label">Rectangle</span>
+              </label>
+              <label id="radio_line_outer" class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="radio_line">
+                <input type="radio" id="radio_line" class="color_radio_button mdl-radio__button" name="shapes" value="5">
+                <span class="mdl-radio__label">Line</span>
+              </label>
+
+
+              <div id="square_settings_holder" class="shape_settings_holder">
+                <div class="shape_setting_line">
+                  <div class="shape_setting_header">Size:</div>
+                  <div class="shape_setting_text">MIN</div>
+                  <div class="shape_setting_field mdl-textfield mdl-js-textfield">
+                    <input id="shape_square_min" class="slider_text_input mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?"
+                              oninput="setSquare(1)">
+                    <label class="mdl-textfield__label" for="shape_square_min"></label>
+                    <span class="mdl-textfield__error">NaN</span>
+                  </div>
+                  <div class="shape_setting_text shape_setting_text_right">MAX</div>
+                  <div class="shape_setting_field mdl-textfield mdl-js-textfield">
+                    <input id="shape_square_max" class="slider_text_input mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?"
+                              oninput="setSquare(2)">
+                    <label class="mdl-textfield__label" for="shape_square_max"></label>
+                    <span class="mdl-textfield__error">NaN</span>
+                  </div>
+                </div>
+              </div>
+
+              <div id="rect_settings_holder" class="shape_settings_holder">
+                <div class="shape_setting_line">
+                  <div class="shape_setting_header">Width:</div>
+                  <div class="shape_setting_text">MIN</div>
+                  <div class="shape_setting_field mdl-textfield mdl-js-textfield">
+                    <input id="shape_rect_minw" class="slider_text_input mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?"
+                              oninput="setRect(3)">
+                    <label class="mdl-textfield__label" for="shape_rect_minw"></label>
+                    <span class="mdl-textfield__error">NaN</span>
+                  </div>
+                  <div class="shape_setting_text shape_setting_text_right">MAX</div>
+                  <div class="shape_setting_field mdl-textfield mdl-js-textfield">
+                    <input id="shape_rect_maxw" class="slider_text_input mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?"
+                              oninput="setRect(4)">
+                    <label class="mdl-textfield__label" for="shape_rect_maxw"></label>
+                    <span class="mdl-textfield__error">NaN</span>
+                  </div>
+                </div>
+                <div>
+                  <div class="shape_setting_header">Height:</div>
+                  <div class="shape_setting_text">MIN</div>
+                  <div class="shape_setting_field mdl-textfield mdl-js-textfield">
+                    <input id="shape_rect_minh" class="slider_text_input mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?"
+                              oninput="setRect(1)">
+                    <label class="mdl-textfield__label" for="shape_rect_minh"></label>
+                    <span class="mdl-textfield__error">NaN</span>
+                  </div>
+                  <div class="shape_setting_text shape_setting_text_right">MAX</div>
+                  <div class="shape_setting_field mdl-textfield mdl-js-textfield">
+                    <input id="shape_rect_maxh" class="slider_text_input mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?"
+                              oninput="setRect(2)">
+                    <label class="mdl-textfield__label" for="shape_rect_maxh"></label>
+                    <span class="mdl-textfield__error">NaN</span>
+                  </div>
+                </div>
+              </div>
+
+              <div id="line_settings_holder" class="shape_settings_holder">
+                <div class="shape_setting_line">
+                  <div class="shape_setting_header">Size:</div>
+                  <div class="shape_setting_text">MIN</div>
+                  <div class="shape_setting_field mdl-textfield mdl-js-textfield">
+                    <input id="shape_line_min" class="slider_text_input mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?"
+                              oninput="setLine(1)">
+                    <label class="mdl-textfield__label" for="shape_line_min"></label>
+                    <span class="mdl-textfield__error">NaN</span>
+                  </div>
+                  <div class="shape_setting_text shape_setting_text_right">MAX</div>
+                  <div class="shape_setting_field mdl-textfield mdl-js-textfield">
+                    <input id="shape_line_max" class="slider_text_input mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?"
+                              oninput="setLine(2)">
+                    <label class="mdl-textfield__label" for="shape_line_max"></label>
+                    <span class="mdl-textfield__error">NaN</span>
+                  </div>
+                </div>
+
+                <label id="radio_line_omni_outer" class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="radio_line_omni">
+                  <input type="radio" id="radio_line_omni" class="color_radio_button mdl-radio__button" name="lines" value="6" checked>
+                  <span class="mdl-radio__label">Omnidirectional</span>
+                </label>
+                <label id="radio_line_vert_outer" class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="radio_line_vert">
+                  <input type="radio" id="radio_line_vert" class="color_radio_button mdl-radio__button" name="lines" value="7">
+                  <span class="mdl-radio__label">Vertical</span>
+                </label>
+                <label id="radio_line_hori_outer" class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="radio_line_hori">
+                  <input type="radio" id="radio_line_hori" class="color_radio_button mdl-radio__button" name="lines" value="8">
+                  <span class="mdl-radio__label">Horizontal</span>
+                </label>
+              </div>
+
+            </div>
+
+
             <div id="sliders_holder" class="holder">
-              <div id="sliders_title">
+              <div id="sliders_title" class="setting_title">
                 <div id="sliders_title_icon" class="title_icon icon material-icons">info</div>
                 <div class="mdl-tooltip mdl-tooltip--large" for="sliders_title_icon">
                   Once a palette is generated, each of its colors can be selected by clicking on its color square.
@@ -146,7 +265,7 @@
 
 
             <div id="i_sliders_holder" class="holder">
-              <div id="i_sliders_title">
+              <div id="i_sliders_title" class="setting_title">
                 <div id="i_sliders_title_icon" class="title_icon icon material-icons">info</div>
                 <div class="mdl-tooltip mdl-tooltip--large" for="i_sliders_title_icon">
                   Change how precisely the colors in palette should be followed.
