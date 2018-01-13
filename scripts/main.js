@@ -159,13 +159,11 @@ function reimage() {
 							mainSizes[1] = lineSize[1];
 							mainSizes[2] = 1;
 							mainSizes[3] = 1;
-							mainDrawMode = 1;
 						} else  {
 							mainSizes[0] = 1;
 							mainSizes[1] = 1;
 							mainSizes[2] = lineSize[0];
 							mainSizes[3] = lineSize[1];
-							mainDrawMode = 1;
 						}
 						break;
 	}
@@ -186,9 +184,10 @@ function reimage() {
 
 	console.log(mainSizes);
 	draw = true;
-	drawWorker.postMessage({"first":true, "drawMode":mainDrawMode, "imgArr":imgArr, "imgArrOrig":imgArrOrig,
-													"width":imageData.width, "height":imageData.height, "colorMode":mainColorMode, "means":mainMeans,
-													"sizes":mainSizes, "colorMargins":mainColorMargins});
+	drawWorker.postMessage({"first":true, "drawMode":mainDrawMode, "lineDir":lineDir, "imgArr":imgArr,
+													"imgArrOrig":imgArrOrig, "width":imageData.width, "height":imageData.height,
+													"colorMode":mainColorMode, "means":mainMeans, "sizes":mainSizes,
+													"colorMargins":mainColorMargins});
 }
 
 

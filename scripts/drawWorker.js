@@ -18,6 +18,7 @@ var burstLength = 3000;
 onmessage = function(msg) {
 	if (msg.data.first) {
 		drawMode = msg.data.drawMode;
+		if (drawMode == 2 && msg.data.lineDir > 0) drawMode = 1;		// use square algorithm for vertical/horizontal lines
 
 		sizeMinH = msg.data.sizes[0];
 		sizeMaxH = msg.data.sizes[1];
