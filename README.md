@@ -1,2 +1,29 @@
-# ReImager
-A program that recreates images by randomly laying down simple shapes on an empty canvas.
+# reimager
+
+Application link: https://jm5619.github.io/reimager/
+
+»reimager« is a web application that re-creates images with the use of random values. As input it accepts a reference image and as output it displays an approximation of the said image, which is continuously updated every few seconds. To create an approximation of the reference image, the program begins with an empty canvas the size of the reference image. In each step of execution the program generates a random shape according to user-defined restrictions and adds it to a random spot on the canvas. If the canvas resembles the reference image better with the new shape added than it did without it, the new shape is kept on the canvas and the program continues on to the next step. Otherwise the shape is discarded before the next step.
+
+The user interface of the application contains four “cards”. The first card is used for uploading images, the second for settings, the third for starting and stopping the program and the fourth for displaying images. The user first uploads a reference image into the application using the button “upload image” on the first card. After the image is uploaded, its filename is displayed next to the button.
+
+Next, the user can decide on the settings to run image generation with. The settings are divided into four parts, each of which includes an “i” icon that displays short instructions on mouse-over. The parts are as follows:
+
+**Configure and generate a color palette**
+
+In this section, the user can decide on general type of color palette that they wish to use for the approximation of their image. They can decide whether to use completely random colors, or define a color palette of their own. By default the program will use random colors, but if the user selects the “Palette” option, a color palette will automatically be generated from the reference image using the k-means clustering algorithm. The generated palette will by default include 5 different colors, but this can be changed by entering a different number of colors into the “Number of colors in palette...” text field, clicking the “save” icon next to it (or pressing enter key) and clicking the “generate palette” button below. While the palette is being generated, the progress of this action is displayed next to the button. When finished, the generated palette is displayed as color squares on the bottom of settings card. Its colors can be individually adjusted in “Change color of selected palette slot” section of settings, which we describe in a later section.
+
+**Select basic shape**
+
+This section allows the user to select the shape that will continuously be added to the empty canvas in order to create an approximation of reference image. The user can choose between “Square”, “Rectangle” and “Line” as basic shapes. The user can then decide on the minimum and maximum dimensions of the selected shape which all the generated shapes will adhere to. The “Line” option can be further configured to include the direction that generated lines will be facing. The directions include “Vertical”, “Horizontal” and “Omnidirectional”, the latter of which allows the lines to face in any direction. The omnidirectional option uses its own line placement algorithm and is as a result up to 50% slower in adding shapes to the canvas as other selections, but this is not really an issue since all options are still quick to converge into a recognizable approximation of the reference image. As a general rule of thumb we may also state that larger shapes make for worse approximations and slower adding of shapes, while smaller shapes are faster, but tend to look like noisy textures if set too small. The user should experiment with shapes and sizes to achieve more interesting-looking results, which is also one of the main uses of this program.
+
+**Change color of selected palette slot**
+
+After the color palette is generated and displayed as colorful squares, the user can click a square to select it. A selected square can have its color edited with the use of sliders and text fields displayed in this section. Each of the color’s three channels can be tweaked separately and the resulting color is shown in its color square, that updates in real time as the values change.
+
+**Configure palette deviation intervals**
+
+In this section, the user can set intervals of deviation for each color channel. When a shape is placed on the canvas and a custom palette for it is generated, the color for the shape will randomly be selected from the colors included in palette. If, however, any of the channels in this section are set to more than zero, the selected color will be randomized further before being used for the shape. If the red channel interval is set to 20, the red value for the color will be randomly selected from the interval of 20 values around the red value that the color in palette uses. So if the selected color is, say RGB(120, 80, 180) and the red deviation interval is set to 20, then the final color can be any from RGB(110, 80, 180) to RGB(130, 80, 180). The same goes for other intervals. This option in essence allows the user to select a palette with a few colors set as “guidelines” while still creating a more colorful image with softer transitions and visible variations between similar colors, that would otherwise just fall under the same color of the palette.
+
+**Generate the image**
+
+The third card contains the “begin” button, which begins the actual work on approximating the image by sending it to a background process along with all the relevant settings data. Every 3 seconds an image is received that shows the work done thus far and is displayed on the fourth card, before the reference image. The “pause/resume” button is used to pause the process after the next update – an additional click will resume it. The image can be saved at any time by clicking on it with the right mouse button and selecting “Save image as...” or a similar option, depending on user’s browser. The number displayed to the right of pause/resume button represents the number of steps taken to reach the currently displayed version of the image.
