@@ -1,6 +1,6 @@
 # reimager
 
-Application link: https://jm5619.github.io/reimager/
+Application link: https://jmakovecki.github.io/reimager/
 
 »reimager« is a web application that re-creates images with the use of random values. As input it accepts a reference image and as output it displays an approximation of the said image, which is continuously updated every few seconds. To create an approximation of the reference image, the program begins with an empty canvas the size of the reference image. In each step of execution the program generates a random shape according to user-defined restrictions and adds it to a random spot on the canvas. If the canvas resembles the reference image better with the new shape added than it did without it, the new shape is kept on the canvas and the program continues on to the next step. Otherwise the shape is discarded before the next step.
 
